@@ -9,10 +9,14 @@ Este diretorio concentra a documentacao especifica da reproducao via API.
 
 Os scripts seguem a mesma separacao:
 
-- `scripts/api/`: chamadas a provedores e teste individual.
+- `scripts/api/`: chamadas a provedores, teste individual e coleta por manifesto.
 - `scripts/data/`: geracao e preparacao dos dados.
 - `scripts/evaluation/`: metricas e validacoes.
 - `scripts/original/`: inferencia local original dos autores.
+
+Os planos de coleta ficam em `experiments/`. O manifesto inicial
+`experiments/smoke-openrouter.json` percorre um caso de cada condicao oficial
+sem misturar a etapa posterior de avaliacao.
 
 O `README.md` na raiz continua sendo o ponto de entrada padrao do repositorio
 original. Os resultados locais ficam em `results/` e os dados de piloto em

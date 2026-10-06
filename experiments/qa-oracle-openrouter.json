@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "smoke-openrouter-qa-oracle",
+  "description": "Um caso de QA Oracle com apenas o documento gold.",
+  "provider": "openrouter",
+  "model": "openrouter/free",
+  "output_dir": "results/experiments",
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 100,
+    "timeout_seconds": 120,
+    "closedbook": false,
+    "prompt_mention_random_ordering": false,
+    "use_random_ordering": false,
+    "query_aware_contextualization": false
+  },
+  "collection": {
+    "cases_per_condition": 1,
+    "max_retries": 3,
+    "retry_base_seconds": 2.0,
+    "request_interval_seconds": 1.0
+  },
+  "conditions": [
+    {
+      "id": "qa-oracle",
+      "task": "qa",
+      "input_path": "qa_data/nq-open-oracle.jsonl.gz",
+      "context_size": 1,
+      "gold_index": 0
+    }
+  ]
+}

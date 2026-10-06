@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "experiment_id": "smoke-openrouter-official-grid",
+  "description": "Um caso por condicao oficial de QA e KV para validar a coleta via API.",
+  "provider": "openrouter",
+  "model": "openrouter/free",
+  "output_dir": "results/experiments",
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 100,
+    "timeout_seconds": 120,
+    "closedbook": false,
+    "prompt_mention_random_ordering": false,
+    "use_random_ordering": false,
+    "query_aware_contextualization": false
+  },
+  "collection": {
+    "cases_per_condition": 1,
+    "max_retries": 3,
+    "retry_base_seconds": 2.0,
+    "request_interval_seconds": 1.0
+  },
+  "conditions": [
+    {
+      "id": "qa-10-gold-0",
+      "task": "qa",
+      "input_path": "qa_data/10_total_documents/nq-open-10_total_documents_gold_at_0.jsonl.gz",
+      "context_size": 10,
+      "gold_index": 0
+    },
+    {
+      "id": "qa-10-gold-4",
+      "task": "qa",
+      "input_path": "qa_data/10_total_documents/nq-open-10_total_documents_gold_at_4.jsonl.gz",
+      "context_size": 10,
+      "gold_index": 4
+    },
+    {
+      "id": "qa-10-gold-9",
+      "task": "qa",
+      "input_path": "qa_data/10_total_documents/nq-open-10_total_documents_gold_at_9.jsonl.gz",
+      "context_size": 10,
+      "gold_index": 9
+    },
+    {
+      "id": "qa-20-gold-0",
+      "task": "qa",
+      "input_path": "qa_data/20_total_documents/nq-open-20_total_documents_gold_at_0.jsonl.gz",
+      "context_size": 20,
+      "gold_index": 0
+    },
+    {
+      "id": "qa-20-gold-4",
+      "task": "qa",
+      "input_path": "qa_data/20_total_documents/nq-open-20_total_documents_gold_at_4.jsonl.gz",
+      "context_size": 20,
+      "gold_index": 4
+    },
+    {
+      "id": "qa-20-gold-9",
+      "task": "qa",
+      "input_path": "qa_data/20_total_documents/nq-open-20_total_documents_gold_at_9.jsonl.gz",
+      "context_size": 20,
+      "gold_index": 9
+    },
+    {
+      "id": "qa-20-gold-14",
+      "task": "qa",
+      "input_path": "qa_data/20_total_documents/nq-open-20_total_documents_gold_at_14.jsonl.gz",
+      "context_size": 20,
+      "gold_index": 14
+    },
+    {
+      "id": "qa-20-gold-19",
+      "task": "qa",
+      "input_path": "qa_data/20_total_documents/nq-open-20_total_documents_gold_at_19.jsonl.gz",
+      "context_size": 20,
+      "gold_index": 19
+    },
+    {
+      "id": "qa-30-gold-0",
+      "task": "qa",
+      "input_path": "qa_data/30_total_documents/nq-open-30_total_documents_gold_at_0.jsonl.gz",
+      "context_size": 30,
+      "gold_index": 0
+    },
+    {
+      "id": "qa-30-gold-4",
+      "task": "qa",
+      "input_path": "qa_data/30_total_documents/nq-open-30_total_documents_gold_at_4.jsonl.gz",
+      "context_size": 30,
+      "gold_index": 4
+    },
+    {
+      "id": "qa-30-gold-9",
+      "task": "qa",
+      "input_path": "qa_data/30_total_documents/nq-open-30_total_documents_gold_at_9.jsonl.gz",
+      "context_size": 30,
+      "gold_index": 9
+    },
+    {
+      "id": "qa-30-gold-14",
+      "task": "qa",
+      "input_path": "qa_data/30_total_documents/nq-open-30_total_documents_gold_at_14.jsonl.gz",
+      "context_size": 30,
+      "gold_index": 14
+    },
+    {
+      "id": "qa-30-gold-19",
+      "task": "qa",
+      "input_path": "qa_data/30_total_documents/nq-open-30_total_documents_gold_at_19.jsonl.gz",
+      "context_size": 30,
+      "gold_index": 19
+    },
+    {
+      "id": "qa-30-gold-24",
+      "task": "qa",
+      "input_path": "qa_data/30_total_documents/nq-open-30_total_documents_gold_at_24.jsonl.gz",
+      "context_size": 30,
+      "gold_index": 24
+    },
+    {
+      "id": "qa-30-gold-29",
+      "task": "qa",
+      "input_path": "qa_data/30_total_documents/nq-open-30_total_documents_gold_at_29.jsonl.gz",
+      "context_size": 30,
+      "gold_index": 29
+    },
+    {
+      "id": "kv-75-gold-0",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-75_keys.jsonl.gz",
+      "context_size": 75,
+      "gold_index": 0
+    },
+    {
+      "id": "kv-75-gold-24",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-75_keys.jsonl.gz",
+      "context_size": 75,
+      "gold_index": 24
+    },
+    {
+      "id": "kv-75-gold-49",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-75_keys.jsonl.gz",
+      "context_size": 75,
+      "gold_index": 49
+    },
+    {
+      "id": "kv-75-gold-74",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-75_keys.jsonl.gz",
+      "context_size": 75,
+      "gold_index": 74
+    },
+    {
+      "id": "kv-140-gold-0",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-140_keys.jsonl.gz",
+      "context_size": 140,
+      "gold_index": 0
+    },
+    {
+      "id": "kv-140-gold-34",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-140_keys.jsonl.gz",
+      "context_size": 140,
+      "gold_index": 34
+    },
+    {
+      "id": "kv-140-gold-69",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-140_keys.jsonl.gz",
+      "context_size": 140,
+      "gold_index": 69
+    },
+    {
+      "id": "kv-140-gold-104",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-140_keys.jsonl.gz",
+      "context_size": 140,
+      "gold_index": 104
+    },
+    {
+      "id": "kv-140-gold-139",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-140_keys.jsonl.gz",
+      "context_size": 140,
+      "gold_index": 139
+    },
+    {
+      "id": "kv-300-gold-0",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-300_keys.jsonl.gz",
+      "context_size": 300,
+      "gold_index": 0
+    },
+    {
+      "id": "kv-300-gold-49",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-300_keys.jsonl.gz",
+      "context_size": 300,
+      "gold_index": 49
+    },
+    {
+      "id": "kv-300-gold-99",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-300_keys.jsonl.gz",
+      "context_size": 300,
+      "gold_index": 99
+    },
+    {
+      "id": "kv-300-gold-149",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-300_keys.jsonl.gz",
+      "context_size": 300,
+      "gold_index": 149
+    },
+    {
+      "id": "kv-300-gold-199",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-300_keys.jsonl.gz",
+      "context_size": 300,
+      "gold_index": 199
+    },
+    {
+      "id": "kv-300-gold-249",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-300_keys.jsonl.gz",
+      "context_size": 300,
+      "gold_index": 249
+    },
+    {
+      "id": "kv-300-gold-299",
+      "task": "kv",
+      "input_path": "kv_retrieval_data/kv-retrieval-300_keys.jsonl.gz",
+      "context_size": 300,
+      "gold_index": 299
+    }
+  ]
+}

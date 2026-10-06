@@ -179,3 +179,135 @@ PYTHONPATH=src python scripts/evaluation/evaluate_qa_responses.py \
   --input-path results/qa-api-predictions.jsonl.gz \
   --output-path results/qa-api-scored.jsonl.gz
 ```
+
+## Coletar uma matriz de arquivos e posicoes
+
+O manifesto `experiments/smoke-openrouter.json` descreve as 31 condicoes da
+grade principal do artigo: 15 de QA e 16 de KV. O smoke test coleta um caso
+por condicao. Ele nao calcula metricas.
+
+Esse manifesto usa `openrouter/free` somente para validar transporte,
+persistencia e retomada com baixo custo. O roteador pode escolher modelos
+diferentes e alguns podem consumir o limite de saida com raciocinio. Antes de
+uma coleta destinada a analise, copie o manifesto, use um `experiment_id`
+novo, selecione um modelo fixo e confira `max_output_tokens`.
+
+Valide todos os arquivos, posicoes gold e prompts sem chamar a API:
+
+```bash
+python scripts/api/run_experiment.py \
+  --manifest experiments/smoke-openrouter.json \
+  --dry-run
+```
+
+Para validar apenas duas condicoes:
+
+```bash
+python scripts/api/run_experiment.py \
+  --manifest experiments/smoke-openrouter.json \
+  --dry-run \
+  --only qa-10-gold-0 \
+  --only kv-75-gold-0
+```
+
+Depois de conferir o modelo, a cota e o dry-run, inicie a coleta real:
+
+```bash
+python scripts/api/run_experiment.py \
+  --manifest experiments/smoke-openrouter.json
+```
+
+Cada condicao recebe seu proprio diretorio:
+
+```text
+results/experiments/smoke-openrouter-official-grid/
+  manifest.json
+  collection_summary.json
+  qa/10_documents/gold_at_0/
+    predictions.jsonl.gz
+    errors.jsonl.gz
+  kv/75_pairs/gold_at_0/
+    predictions.jsonl.gz
+    errors.jsonl.gz
+```
+
+`predictions.jsonl.gz` contem somente respostas concluidas e preserva o
+exemplo original, o prompt, a resposta e os metadados da API. Erros de
+validacao ou transporte ficam em `errors.jsonl.gz` e nao devem ser enviados
+ao avaliador como respostas do modelo.
+
+### Retomada e limites
+
+Cada caso possui um `record_id` deterministico. Ao executar novamente o mesmo
+manifesto, respostas ja presentes em `predictions.jsonl.gz` sao ignoradas;
+casos que terminaram em erro sao tentados novamente. A escrita ocorre depois
+de cada resposta, sem esperar a condicao inteira terminar.
+
+O bloco `collection` do manifesto controla casos por condicao, retries,
+intervalo entre requisicoes e espera exponencial. Respostas `429`, timeouts e
+erros temporarios `5xx` sao tentados novamente. A coleta continua nas demais
+condicoes quando um caso falha.
+
+Use um `experiment_id` novo ao alterar modelo, parametros ou grade. O
+`manifest.json` copiado para o diretorio de resultados e imutavel: a automacao
+recusa misturar configuracoes diferentes no mesmo experimento.
+
+### Avaliacao permanece separada
+
+O coletor nao cria `scored.jsonl.gz` nem calcula acuracia. Depois de confirmar
+que a coleta esta completa, os arquivos `predictions.jsonl.gz` podem ser
+passados aos avaliadores em `scripts/evaluation/`, seguindo o mesmo fluxo do
+repositorio original.
+
+## Testes automatizados
+
+Ative o ambiente do projeto e execute:
+
+```bash
+conda activate lost-in-the-middle
+python -m pytest -q
+```
+
+Os testes de API usam clientes simulados. Eles validam manifestos, construcao
+de prompts, persistencia, retomada e retries sem ler chaves, acessar a rede ou
+consumir cota dos provedores.
+
+## Baselines QA
+
+Os baselines Oracle e closed-book usam manifestos separados para impedir que
+prompts com e sem documentos sejam misturados na mesma rodada:
+
+```text
+experiments/qa-oracle-openrouter.json
+experiments/qa-closedbook-openrouter.json
+```
+
+Os equivalentes para Groq usam `openai/gpt-oss-20b`:
+
+```text
+experiments/smoke-groq.json
+experiments/qa-oracle-groq.json
+experiments/qa-closedbook-groq.json
+```
+
+O cliente envia `include_reasoning: false` para esse modelo, para priorizar a
+resposta final esperada pelos avaliadores. A disponibilidade do modelo foi
+confirmada pela API da Groq antes da criacao dos manifestos; a cota total da
+conta ainda deve ser conferida no painel antes de executar a grade completa.
+
+Ambos usam `qa_data/nq-open-oracle.jsonl.gz`, com 2.655 perguntas. No Oracle,
+o unico documento gold e enviado ao modelo. No closed-book, o arquivo fornece
+a pergunta e as respostas esperadas, mas `closedbook: true` faz o coletor
+enviar somente a pergunta.
+
+Valide os dois sem chamadas de API:
+
+```bash
+python scripts/api/run_experiment.py \
+  --manifest experiments/qa-oracle-openrouter.json \
+  --dry-run
+
+python scripts/api/run_experiment.py \
+  --manifest experiments/qa-closedbook-openrouter.json \
+  --dry-run
+```
