@@ -1,0 +1,11 @@
+{
+  "provider": "openrouter",
+  "model": "openrouter/free",
+  "task": "kv",
+  "dataset": "data/piloto/kv-75.jsonl.gz",
+  "case_index": 0,
+  "temperature": 0,
+  "max_output_tokens": 200,
+  "timeout_seconds": 120,
+  "output_dir": "results"
+}

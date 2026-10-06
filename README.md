@@ -3,6 +3,9 @@
 This repository contains accompanying material for [Lost in the Middle: How
 Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172).
 
+The API workflow and project-specific documentation are organized in
+[`docs/`](./docs/README.md).
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -38,7 +41,7 @@ pre-commit install
 
 ## Multi-Document Question Answering Experiments
 
-See [EXPERIMENTS.md](./EXPERIMENTS.md#multi-document-question-answering) for
+See [docs/EXPERIMENTS.md](./docs/EXPERIMENTS.md#multi-document-question-answering) for
 instructions to run and evaluate models on the multi-document QA task.
 
 ## Multi-Document Question Answering Data
@@ -92,7 +95,7 @@ wget https://nlp.stanford.edu/data/nfliu/lost-in-the-middle/nq-open-contriever-m
 
 ``` sh
 for gold_index in 0 4 9 14 19; do
-    python -u ./scripts/make_qa_data_from_retrieval_results.py \
+    python -u ./scripts/data/make_qa_data_from_retrieval_results.py \
         --input-path nq-open-contriever-msmarco-retrieved-documents.jsonl.gz \
         --num-total-documents 20 \
         --gold-index ${gold_index} \
@@ -102,7 +105,7 @@ done
 
 ## Key-Value Retrieval Experiments
 
-See [EXPERIMENTS.md](./EXPERIMENTS.md#key-value-retrieval) for
+See [docs/EXPERIMENTS.md](./docs/EXPERIMENTS.md#key-value-retrieval) for
 instructions to run and evaluate models on the key-value retrieval task.
 
 ## Key-Value Retrieval Data
@@ -146,7 +149,7 @@ its expected associated value.
 To generate new key-value retrieval data, use:
 
 ``` sh
-python -u ./scripts/make_kv_retrieval_data.py \
+python -u ./scripts/data/make_kv_retrieval_data.py \
     --num-keys 300 \
     --num-examples 500 \
     --output-path kv-retrieval_data/kv-retrieval-300_keys.jsonl.gz

@@ -7,7 +7,7 @@ VRAM. You may need to modify commands to fit your own computing environment
 ## mpt-30b-instruct
 
 To run `mpt-30b` and `mpt-30b-instruct` on multi-document question answering,
-use [`./scripts/get_qa_responses_from_mpt.py`](./scripts/get_qa_responses_from_mpt.py).
+use [`scripts/original/get_qa_responses_from_mpt.py`](../scripts/original/get_qa_responses_from_mpt.py).
 Below are commands for running `mpt-30b-instruct` on different multi-document QA
 settings.
 
@@ -16,7 +16,7 @@ settings.
 Getting predictions:
 
 ```
-python -u ./scripts/get_qa_responses_from_mpt.py \
+python -u ./scripts/original/get_qa_responses_from_mpt.py \
     --input-path qa_data/nq-open-oracle.jsonl.gz \
     --num-gpus 1 \
     --max-new-tokens 100 \
@@ -30,7 +30,7 @@ python -u ./scripts/get_qa_responses_from_mpt.py \
 Evaluating: 
 
 ```
-python -u ./scripts/evaluate_qa_responses.py \
+python -u ./scripts/evaluation/evaluate_qa_responses.py \
     --input-path qa_predictions/nq-open-oracle-mpt-30b-instruct-predictions.jsonl.gz \
     --output-path qa_predictions/nq-open-oracle-mpt-30b-instruct-predictions-scored.jsonl.gz
 ```
@@ -46,7 +46,7 @@ best_subspan_em: 0.816572504708098
 Getting predictions:
 
 ```
-python -u ./scripts/get_qa_responses_from_mpt.py \
+python -u ./scripts/original/get_qa_responses_from_mpt.py \
     --input-path qa_data/nq-open-oracle.jsonl.gz \
     --num-gpus 1 \
     --max-new-tokens 100 \
@@ -61,7 +61,7 @@ python -u ./scripts/get_qa_responses_from_mpt.py \
 Evaluating: 
 
 ```
-python -u ./scripts/evaluate_qa_responses.py \
+python -u ./scripts/evaluation/evaluate_qa_responses.py \
     --input-path qa_predictions/nq-open-oracle-mpt-30b-instruct-closedbook-predictions.jsonl.gz \
     --output-path qa_predictions/nq-open-oracle-mpt-30b-instruct-closedbook-predictions-scored.jsonl.gz
 ```
@@ -78,7 +78,7 @@ Getting predictions:
 
 ```
 for gold_index in 0 4 9 14 19; do
-    python -u ./scripts/get_qa_responses_from_mpt.py \
+    python -u ./scripts/original/get_qa_responses_from_mpt.py \
         --input-path qa_data/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}.jsonl.gz \
         --num-gpus 1 \
         --max-new-tokens 100 \
@@ -94,7 +94,7 @@ Evaluating:
 
 ```
 for gold_index in 0 4 9 14 19; do
-    python -u ./scripts/evaluate_qa_responses.py \
+    python -u ./scripts/evaluation/evaluate_qa_responses.py \
         --input-path qa_predictions/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}-mpt-30b-instruct-predictions.jsonl.gz \
         --output-path qa_predictions/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}-mpt-30b-instruct-predictions-scored.jsonl.gz
 done
@@ -122,7 +122,7 @@ best_subspan_em: 0.5623352165725047
 ## longchat-13b-16k
 
 To run `longchat-13b-16k` on multi-document question answering,
-use [`./scripts/get_qa_responses_from_longchat.py`](./scripts/get_qa_responses_from_longchat.py).
+use [`scripts/original/get_qa_responses_from_longchat.py`](../scripts/original/get_qa_responses_from_longchat.py).
 Below are commands for running `longchat-13b-16k` on different multi-document QA
 settings.
 
@@ -131,7 +131,7 @@ settings.
 Getting predictions:
 
 ```
-python -u ./scripts/get_qa_responses_from_longchat.py \
+python -u ./scripts/original/get_qa_responses_from_longchat.py \
     --input-path qa_data/nq-open-oracle.jsonl.gz \
     --num-gpus 1 \
     --max-new-tokens 100 \
@@ -145,7 +145,7 @@ python -u ./scripts/get_qa_responses_from_longchat.py \
 Evaluating: 
 
 ```
-python -u ./scripts/evaluate_qa_responses.py \
+python -u ./scripts/evaluation/evaluate_qa_responses.py \
     --input-path qa_predictions/nq-open-oracle-longchat-13b-16k-predictions.jsonl.gz \
     --output-path qa_predictions/nq-open-oracle-longchat-13b-16k-predictions-scored.jsonl.gz
 ```
@@ -161,7 +161,7 @@ best_subspan_em: 0.8263653483992467
 Getting predictions:
 
 ```
-python -u ./scripts/get_qa_responses_from_longchat.py \
+python -u ./scripts/original/get_qa_responses_from_longchat.py \
     --input-path qa_data/nq-open-oracle.jsonl.gz \
     --num-gpus 1 \
     --max-new-tokens 100 \
@@ -176,7 +176,7 @@ python -u ./scripts/get_qa_responses_from_longchat.py \
 Evaluating: 
 
 ```
-python -u ./scripts/evaluate_qa_responses.py \
+python -u ./scripts/evaluation/evaluate_qa_responses.py \
     --input-path qa_predictions/nq-open-oracle-longchat-13b-16k-closedbook-predictions.jsonl.gz \
     --output-path qa_predictions/nq-open-oracle-longchat-13b-16k-closedbook-predictions-scored.jsonl.gz
 ```
@@ -193,7 +193,7 @@ Getting predictions:
 
 ```
 for gold_index in 0 4 9 14 19; do
-    python -u ./scripts/get_qa_responses_from_longchat.py \
+    python -u ./scripts/original/get_qa_responses_from_longchat.py \
         --input-path qa_data/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}.jsonl.gz \
         --num-gpus 1 \
         --max-new-tokens 100 \
@@ -209,7 +209,7 @@ Evaluating:
 
 ```
 for gold_index in 0 4 9 14 19; do
-    python -u ./scripts/evaluate_qa_responses.py \
+    python -u ./scripts/evaluation/evaluate_qa_responses.py \
         --input-path qa_predictions/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}-longchat-13b-16k-predictions.jsonl.gz \
         --output-path qa_predictions/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}-longchat-13b-16k-predictions-scored.jsonl.gz
 done
@@ -237,7 +237,7 @@ best_subspan_em: 0.5502824858757062
 ## llama-2
 
 To run llama-2 models on multi-document question answering,
-use [`./scripts/get_qa_responses_from_llama_2.py`](./scripts/get_qa_responses_from_llama_2.py).
+use [`scripts/original/get_qa_responses_from_llama_2.py`](../scripts/original/get_qa_responses_from_llama_2.py).
 Below are commands for running `Llama-2-70b-chat-hf` on different multi-document QA
 settings. You can run any other Llama-2 model by changing the model identifier (e.g., 
 `Llama-2-13b-hf`, `Llama-2-7b-chat-hf`, etc).
@@ -250,7 +250,7 @@ Running the 70b models requires 2 80GB GPUs. If you're running a 13b or 7b model
 Getting predictions:
 
 ```
-python -u ./scripts/get_qa_responses_from_llama_2.py \
+python -u ./scripts/original/get_qa_responses_from_llama_2.py \
     --input-path qa_data/nq-open-oracle.jsonl.gz \
     --max-new-tokens 100 \
     --num-gpus 2 \
@@ -261,7 +261,7 @@ python -u ./scripts/get_qa_responses_from_llama_2.py \
 Evaluating: 
 
 ```
-python -u ./scripts/evaluate_qa_responses.py \
+python -u ./scripts/evaluation/evaluate_qa_responses.py \
     --input-path qa_predictions/nq-open-oracle-llama-2-70b-chat-hf-predictions.jsonl.gz \
     --output-path qa_predictions/nq-open-oracle-llama-2-70b-chat-hf-predictions-scored.jsonl.gz
 ```
@@ -277,7 +277,7 @@ best_subspan_em: 0.8467043314500942
 Getting predictions:
 
 ```
-python -u ./scripts/get_qa_responses_from_llama_2.py \
+python -u ./scripts/original/get_qa_responses_from_llama_2.py \
     --input-path qa_data/nq-open-oracle.jsonl.gz \
     --num-gpus 2 \
     --max-new-tokens 100 \
@@ -289,7 +289,7 @@ python -u ./scripts/get_qa_responses_from_llama_2.py \
 Evaluating: 
 
 ```
-python -u ./scripts/evaluate_qa_responses.py \
+python -u ./scripts/evaluation/evaluate_qa_responses.py \
     --input-path qa_predictions/nq-open-oracle-llama-2-70b-chat-hf-closedbook-predictions.jsonl.gz \
     --output-path qa_predictions/nq-open-oracle-llama-2-70b-chat-hf-closedbook-predictions-scored.jsonl.gz
 ```
@@ -306,7 +306,7 @@ Getting predictions:
 
 ```
 for gold_index in 0 4 9 14 19; do
-    python -u ./scripts/get_qa_responses_from_llama_2.py \
+    python -u ./scripts/original/get_qa_responses_from_llama_2.py \
         --input-path qa_data/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}.jsonl.gz \
         --max-new-tokens 100 \
         --num-gpus 2 \
@@ -319,7 +319,7 @@ Evaluating:
 
 ```
 for gold_index in 0 4 9 14 19; do
-    python -u ./scripts/evaluate_qa_responses.py \
+    python -u ./scripts/evaluation/evaluate_qa_responses.py \
         --input-path qa_predictions/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}-llama-2-70b-chat-hf-predictions.jsonl.gz \
         --output-path qa_predictions/20_total_documents/nq-open-20_total_documents_gold_at_${gold_index}-llama-2-70b-chat-hf-predictions-scored.jsonl.gz
 done
@@ -353,7 +353,7 @@ VRAM. You may need to modify commands to fit your own computing environment
 ## mpt-30b-instruct
 
 To run `mpt-30b` and `mpt-30b-instruct` on key-value retrieval, use
-[`./scripts/get_kv_responses_from_mpt.py`](./scripts/get_kv_responses_from_mpt.py).
+[`scripts/original/get_kv_responses_from_mpt.py`](../scripts/original/get_kv_responses_from_mpt.py).
 Below are commands for running `mpt-30b-instruct` on different KV retrieval
 settings.
 
@@ -363,7 +363,7 @@ Getting predictions:
 
 ```
 for gold_index in 0 34 69 104 139; do
-    python -u ./scripts/get_kv_responses_from_mpt.py \
+    python -u ./scripts/original/get_kv_responses_from_mpt.py \
         --input-path kv_retrieval_data/kv-retrieval-140_keys.jsonl.gz \
         --batch-size 1 \
         --gold-index ${gold_index} \
@@ -378,7 +378,7 @@ Evaluating:
 
 ```
 for gold_index in 0 34 69 104 139; do
-    python -u ./scripts/evaluate_kv_responses.py \
+    python -u ./scripts/evaluation/evaluate_kv_responses.py \
         --input-path kv_predictions/kv-retrieval-140_keys_gold_at_${gold_index}-mpt-30b-instruct-predictions.jsonl.gz \
         --output-path kv_predictions/kv-retrieval-140_keys_gold_at_${gold_index}-mpt-30b-instruct-predictions-scored.jsonl.gz
 done
@@ -406,7 +406,7 @@ best_subspan_em: 0.962
 ## longchat-13b-16k
 
 To run `longchat-13b-16k` on key-value retrieval, use
-[`./scripts/get_kv_responses_from_longchat.py`](./scripts/get_kv_responses_from_mpt.py).
+[`scripts/original/get_kv_responses_from_longchat.py`](../scripts/original/get_kv_responses_from_longchat.py).
 Below are commands for running `longchat-13b-16k` on different KV retrieval
 settings.
 
@@ -416,7 +416,7 @@ Getting predictions:
 
 ```
 for gold_index in 0 34 69 104 139; do
-    python -u ./scripts/get_kv_responses_from_longchat.py \
+    python -u ./scripts/original/get_kv_responses_from_longchat.py \
         --input-path kv_retrieval_data/kv-retrieval-140_keys.jsonl.gz \
         --batch-size 1 \
         --gold-index ${gold_index} \
@@ -431,7 +431,7 @@ Evaluating:
 
 ```
 for gold_index in 0 34 69 104 139; do
-    python -u ./scripts/evaluate_kv_responses.py \
+    python -u ./scripts/evaluation/evaluate_kv_responses.py \
         --input-path kv_predictions/kv-retrieval-140_keys_gold_at_${gold_index}-longchat-13b-16k-predictions.jsonl.gz \
         --output-path kv_predictions/kv-retrieval-140_keys_gold_at_${gold_index}-longchat-13b-16k-predictions-scored.jsonl.gz
 done
